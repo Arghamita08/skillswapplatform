@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // ← Step 1
 
 export default function Skills() {
   const allSkills = [
@@ -20,6 +21,7 @@ export default function Skills() {
   ];
 
   const [filterCategory, setFilterCategory] = useState('All');
+  const navigate = useNavigate(); // ← Step 2
 
   const categories = ['All', ...new Set(allSkills.map(skill => skill.category))];
   const filteredSkills = allSkills.filter(skill =>
@@ -40,8 +42,7 @@ export default function Skills() {
               ${filterCategory === category
                 ? 'bg-blue-600 text-white shadow-md'
                 : 'bg-gray-200 text-gray-700 hover:bg-blue-100 hover:text-blue-700'
-              }`
-            }
+              }`}
           >
             {category}
           </button>
@@ -52,7 +53,11 @@ export default function Skills() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredSkills.length > 0 ? (
           filteredSkills.map(skill => (
-            <div key={skill.id} className="border border-gray-200 rounded-lg p-5 bg-gray-50 hover:shadow-md transition-shadow duration-200">
+            <div
+              key={skill.id}
+              onClick={() => navigate('/messages')} // ← Step 3
+              className="cursor-pointer border border-gray-200 rounded-lg p-5 bg-gray-50 hover:shadow-md transition-shadow duration-200 hover:bg-blue-50"
+            >
               <h3 className="text-xl font-semibold text-gray-800 mb-2">{skill.name}</h3>
               <p className="text-sm text-blue-600 font-medium">Category: {skill.category}</p>
             </div>
