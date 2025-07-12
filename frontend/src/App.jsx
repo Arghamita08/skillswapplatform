@@ -4,6 +4,8 @@ import Profile from './pages/Profile'
 import Skills from './pages/Skills'
 import Swap from './pages/Swap'
 import Messages from './pages/Messages'
+import SignUp from './pages/SignUp'
+import Login from './pages/Login'
 import Navbar from './components/Navbar'
 
 function App() {
@@ -17,6 +19,8 @@ function App() {
           <Route path="/skills" element={<Skills />} />
           <Route path="/swap" element={<Swap />} />
           <Route path="/messages" element={<Messages />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </div>
     </Router>
