@@ -16,7 +16,7 @@ You'll need Node.js (LTS recommended) and npm (comes with Node.js) installed.
 
 Installation:
 Clone the repository:
-git clone https://github.com/yArghamita08/skill-swap-platform.git
+git clone https://github.com/Arghamita08/skill-swap-platform.git
 cd skillswapplatform
 
 Install dependencies:
@@ -24,7 +24,7 @@ Install dependencies:
 npm install
 Start the development server:
 npm start
-This will open the application in your browser at http://localhost:3000.
+This will open the application in your browser at http://localhost:3000 or any other localhost server.
 
 Project Structure & Usage
 The project follows a standard React application structure. Key directories include src/components for reusable UI elements (like Navbar) and src/pages for top-level components representing distinct application views.
