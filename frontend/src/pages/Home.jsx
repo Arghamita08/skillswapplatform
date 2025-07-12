@@ -4,29 +4,26 @@ import { Link } from "react-router-dom";
 export default function Home() {
   return (
     <div className="max-w-7xl mx-auto p-4">
-      {/* Navigation Bar */}
-      <nav className="flex justify-center space-x-8 py-4 mb-8">
-        <Link to="/" className="text-black-600">Home</Link>
-        <Link to="#" className="text-black-600">Skills</Link>
-        <Link to="#" className="text-black-600">Swap</Link>
-        <Link to="#" className="text-black-600">Messages</Link>
-        <Link to="#" className="text-black-600">Profile</Link>
-      </nav>
 
       {/* Hero Section */}
       <section className="text-center py-10">
         <h1 className="text-4xl font-bold mb-4">Unlock Skills. Exchange Knowledge.</h1>
         <p className="text-lg mb-6">StackIt lets you swap skills with a vibrant community. Learn, teach, and grow together.</p>
         <div className="space-x-4">
-          {/* Sign Up Button - Now uses Link correctly */}
+          {/* Sign Up Button */}
           <Link
-            to="/signup" // Use 'to' prop for the destination path
+            to="/signup"
             className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-white hover:text-blue-600 border border-blue-600 transition-colors duration-300"
           >
             Sign Up
           </Link>
-          {/* Log In Button - Consider changing this to a Link too if you have a /login page */}
-          <button className="border border-blue-600 text-blue-600 px-6 py-2 rounded hover:bg-blue-600 hover:text-white transition-colors duration-300">Log In</button>
+          {/* Log In Button */}
+          <Link
+            to="/login"
+            className="border border-blue-600 text-blue-600 px-6 py-2 rounded hover:bg-blue-600 hover:text-white transition-colors duration-300"
+          >
+            Log In
+          </Link>
         </div>
       </section>
 
@@ -62,5 +59,5 @@ export default function Home() {
         </div>
       </section>
     </div>
-  )
+  );
 }
