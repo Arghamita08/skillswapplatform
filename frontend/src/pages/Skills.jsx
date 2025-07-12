@@ -1,116 +1,66 @@
-import { useState } from 'react'
-
-const mockSkills = [
-  {
-    id: 1,
-    skill: 'Graphic Design',
-    description: 'I can help with logos, posters, and branding.',
-    user: 'Alice',
-    category: 'Design',
-    location: 'Delhi',
-    rating: 4.5,
-  },
-  {
-    id: 2,
-    skill: 'Web Development',
-    description: 'Front-end development using React and Tailwind.',
-    user: 'Bob',
-    category: 'Programming',
-    location: 'Bangalore',
-    rating: 4.8,
-  },
-  {
-    id: 3,
-    skill: 'Photography',
-    description: 'Event and portrait photography.',
-    user: 'Charlie',
-    category: 'Art',
-    location: 'Mumbai',
-    rating: 4.3,
-  },
-]
+import React, { useState } from 'react';
 
 export default function Skills() {
-  const [searchTerm, setSearchTerm] = useState('')
-  const [category, setCategory] = useState('')
-  const [location, setLocation] = useState('')
-  const [minRating, setMinRating] = useState(0)
+  const allSkills = [
+    { id: 1, name: 'Web Development (React)', category: 'Tech' },
+    { id: 2, name: 'Graphic Design (Figma)', category: 'Design' },
+    { id: 3, name: 'Content Writing', category: 'Marketing' },
+    { id: 4, name: 'Mobile App Development (Flutter)', category: 'Tech' },
+    { id: 5, name: 'UI/UX Design', category: 'Design' },
+    { id: 6, name: 'SEO Optimization', category: 'Marketing' },
+    { id: 7, name: 'Data Analysis (Python)', category: 'Tech' },
+    { id: 8, name: 'Video Editing', category: 'Multimedia' },
+    { id: 9, name: 'Brand Strategy', category: 'Marketing' },
+    { id: 10, name: 'Digital Painting', category: 'Design' },
+    { id: 11, name: 'Cybersecurity Basics', category: 'Tech' },
+    { id: 12, name: 'Photography', category: 'Multimedia' },
+    { id: 13, name: 'Project Management', category: 'Business' },
+    { id: 14, name: 'Public Speaking', category: 'Communication' },
+    { id: 15, name: 'Copywriting', category: 'Marketing' },
+  ];
 
-  const filteredSkills = mockSkills.filter((skill) => {
-    return (
-      skill.skill.toLowerCase().includes(searchTerm.toLowerCase()) &&
-      (category === '' || skill.category === category) &&
-      (location === '' || skill.location === location) &&
-      skill.rating >= minRating
-    )
-  })
+  const [filterCategory, setFilterCategory] = useState('All');
+
+  const categories = ['All', ...new Set(allSkills.map(skill => skill.category))];
+  const filteredSkills = allSkills.filter(skill =>
+    filterCategory === 'All' ? true : skill.category === filterCategory
+  );
 
   return (
-    <div className="max-w-7xl mx-auto p-4">
-      <h2 className="text-2xl font-semibold mb-4">Skill Marketplace</h2>
+    <div className="max-w-6xl mx-auto p-6 bg-white shadow-lg rounded-lg">
+      <h1 className="text-3xl font-bold text-gray-800 mb-6 text-center">Explore Skills</h1>
 
-      {/* Search & Filters */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-        <input
-          type="text"
-          placeholder="Search skills..."
-          className="border p-2 rounded"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-
-        <select
-          className="border p-2 rounded"
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-        >
-          <option value="">All Categories</option>
-          <option value="Design">Design</option>
-          <option value="Programming">Programming</option>
-          <option value="Art">Art</option>
-        </select>
-
-        <select
-          className="border p-2 rounded"
-          value={location}
-          onChange={(e) => setLocation(e.target.value)}
-        >
-          <option value="">All Locations</option>
-          <option value="Delhi">Delhi</option>
-          <option value="Bangalore">Bangalore</option>
-          <option value="Mumbai">Mumbai</option>
-        </select>
-
-        <select
-          className="border p-2 rounded"
-          value={minRating}
-          onChange={(e) => setMinRating(Number(e.target.value))}
-        >
-          <option value="0">All Ratings</option>
-          <option value="4">4+ stars</option>
-          <option value="4.5">4.5+ stars</option>
-        </select>
+      {/* Filter Section */}
+      <div className="mb-6 flex flex-wrap gap-3 justify-center">
+        {categories.map(category => (
+          <button
+            key={category}
+            onClick={() => setFilterCategory(category)}
+            className={`px-5 py-2 rounded-full text-sm font-medium transition-colors duration-200
+              ${filterCategory === category
+                ? 'bg-blue-600 text-white shadow-md'
+                : 'bg-gray-200 text-gray-700 hover:bg-blue-100 hover:text-blue-700'
+              }`
+            }
+          >
+            {category}
+          </button>
+        ))}
       </div>
 
-      {/* Skill Listings */}
-      <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
+      {/* Skills List */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredSkills.length > 0 ? (
-          filteredSkills.map((skill) => (
-            <div key={skill.id} className="border rounded-xl p-4 shadow hover:shadow-md transition">
-              <h3 className="text-xl font-semibold mb-1">{skill.skill}</h3>
-              <p className="text-gray-700 mb-2">{skill.description}</p>
-              <div className="text-sm text-gray-600">
-                <p><strong>User:</strong> {skill.user}</p>
-                <p><strong>Category:</strong> {skill.category}</p>
-                <p><strong>Location:</strong> {skill.location}</p>
-                <p><strong>Rating:</strong> ⭐ {skill.rating}</p>
-              </div>
+          filteredSkills.map(skill => (
+            <div key={skill.id} className="border border-gray-200 rounded-lg p-5 bg-gray-50 hover:shadow-md transition-shadow duration-200">
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">{skill.name}</h3>
+              <p className="text-sm text-blue-600 font-medium">Category: {skill.category}</p>
             </div>
           ))
         ) : (
-          <p>No skills found matching your filters.</p>
+          <p className="col-span-full text-center text-gray-600 text-lg">No skills found for this category.</p>
         )}
       </div>
     </div>
-  )
+  );
 }
