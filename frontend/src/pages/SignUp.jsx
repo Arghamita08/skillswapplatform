@@ -1,13 +1,20 @@
 import React from 'react';
-import { Link } from "react-router-dom";
-import Login from './Login';
+import { Link, useNavigate } from "react-router-dom";
+import Profile from './Profile';
 
 export default function SignUp() {
+  const navigate = useNavigate(); 
+
+  const handleSubmit = (event) => {
+    event.preventDefault(); 
+    navigate('/profile');
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
         <h2 className="text-3xl font-bold text-center mb-6 text-blue-600">Join StackIt</h2>
-        <form>
+        <form onSubmit={handleSubmit}> {/* Add onSubmit handler to the form */}
           <div className="mb-4">
             <label htmlFor="username" className="block text-gray-700 text-sm font-bold mb-2">
               Username
@@ -56,7 +63,7 @@ export default function SignUp() {
         </form>
         <p className="text-center text-gray-600 text-sm mt-4">
           Already have an account?{' '}
-          <Link to="/login" className="text-blue-600 hover:underline"> {/* Use 'to' prop */}
+          <Link to="/login" className="text-blue-600 hover:underline">
             Log In
           </Link>
         </p>
