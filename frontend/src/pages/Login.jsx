@@ -1,13 +1,19 @@
 import React from 'react';
-import { Link } from "react-router-dom";
-import SignUp from './Signup';
+import { Link, useNavigate } from "react-router-dom"; 
 
 export default function Login() {
+  const navigate = useNavigate(); 
+
+  const handleSubmit = (event) => {
+    event.preventDefault(); 
+    navigate('/profile');
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
         <h2 className="text-3xl font-bold text-center mb-6 text-blue-600">Welcome Back to StackIt</h2>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label htmlFor="email" className="block text-gray-700 text-sm font-bold mb-2">
               Email Address
