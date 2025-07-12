@@ -1,12 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
-import Profile from './Profile';
+import { useUser } from '../context/UserContext'; 
 
 export default function SignUp() {
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
+  const { login } = useUser(); 
+
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState(''); 
+  const [password, setPassword] = useState(''); 
+
+  const handleUsernameChange = (event) => {
+    setUsername(event.target.value);
+  };
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
+  };
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
+  };
 
   const handleSubmit = (event) => {
-    event.preventDefault(); 
+    event.preventDefault();
+
+    
+    const newUser = {
+      name: username, 
+      email: email,
+      
+    };
+
+    
+    login(newUser);
+
     navigate('/profile');
   };
 
@@ -14,7 +40,7 @@ export default function SignUp() {
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
         <h2 className="text-3xl font-bold text-center mb-6 text-blue-600">Join StackIt</h2>
-        <form onSubmit={handleSubmit}> {/* Add onSubmit handler to the form */}
+        <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label htmlFor="username" className="block text-gray-700 text-sm font-bold mb-2">
               Username
@@ -25,6 +51,8 @@ export default function SignUp() {
               name="username"
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Choose a username"
+              value={username}
+              onChange={handleUsernameChange}
               required
             />
           </div>
@@ -38,6 +66,8 @@ export default function SignUp() {
               name="email"
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Enter your email"
+              value={email} 
+              onChange={handleEmailChange}
               required
             />
           </div>
@@ -51,6 +81,8 @@ export default function SignUp() {
               name="password"
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Create a strong password"
+              value={password} 
+              onChange={handlePasswordChange} 
               required
             />
           </div>
